@@ -21,6 +21,16 @@ class DefaultController extends AbstractController
     public function HelloWorldName(string $name){
         return new Response('<h1>Hello World '.$name.'</h1>');
     }
+
+    /**
+     * @Route("/DefaultController ", name="DefaultController")
+     */
+    public function DefaultController(){
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+    
     
     /*public function index(): Response
     {
