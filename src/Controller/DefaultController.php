@@ -36,6 +36,13 @@ class DefaultController extends AbstractController
             'tableau' => $tableau
         ]);
     }
+
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function Contact(){
+        return $this->render('contact.html.twig');
+    }
     
     
     /*public function index(): Response
