@@ -23,11 +23,17 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/DefaultController ", name="DefaultController")
+     * @Route("/ ", name="home")
      */
-    public function DefaultController(){
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
+    public function Home(){
+        $tableau = array(
+            "1" => array("nom" => "Lebron 1", "prenom" => "James 1", "number" => "0123456789 1"),
+            "2" => array("nom" => "Lebron 2", "prenom" => "James 2", "number" => "0123456789 2"),
+            "3" => array("nom" => "Lebron 3", "prenom" => "James 3", "number" => "0123456789 3")
+        );
+
+        return $this->render('home.html.twig', [
+            'tableau' => $tableau
         ]);
     }
     
