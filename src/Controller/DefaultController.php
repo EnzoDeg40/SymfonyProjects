@@ -9,27 +9,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/test2", name="app_default")
+     * @Route("/hello-world", name="hello_world")
      */
-    public function index(){
-        return new Response('Hello World');
+    public function HelloWorld(){
+        return new Response('<h1>Hello World</h1>');
     }
 
     /**
-     * @Route("/S", name="app_default")
+     * @Route("/hello-world/{name} ", name="hello_world_name")
      */
-    public function index2(){
-        // Return html file
-        return $this->render('default/index.html.twig');
+    public function HelloWorldName(string $name){
+        return new Response('<h1>Hello World '.$name.'</h1>');
     }
     
-    /**
-     * @Route("/blog/{slug}", name="app_default", requirements={"slug"="\d+"})
-     */
-    public function index3(int $slug){
-        return new Response('Hello World '. $slug);
-    }
-
     /*public function index(): Response
     {
         return $this->render('default/index.html.twig', [
