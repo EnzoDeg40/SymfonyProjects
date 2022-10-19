@@ -32,7 +32,7 @@ class DefaultController extends AbstractController
             "3" => array("nom" => "Lebron 3", "prenom" => "James 3", "number" => "0123456789 3")
         );
 
-        return $this->render('home.html.twig', [
+        return $this->render('base.html.twig', [
             'tableau' => $tableau
         ]);
     }
