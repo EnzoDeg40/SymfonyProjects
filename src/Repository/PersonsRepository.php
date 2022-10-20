@@ -39,13 +39,14 @@ class PersonsRepository extends ServiceEntityRepository
         }
     }
 
-    public function ListAllPersons(): array
+    public function ListAdults(): array
     {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT id, name, firstname, phone
+            'SELECT id, name, firstname, phone, age
             FROM App\Entity\Persons'
+            //WHERE age > 18'
         );
 
         // returns an array of Product objects

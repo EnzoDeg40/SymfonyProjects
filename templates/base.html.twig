@@ -21,6 +21,7 @@
     <table class="table table-dark">
         <thead>
             <tr>
+                <th scope="col">#</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Numéro de téléphone</th>
@@ -30,6 +31,7 @@
         <tbody>
             {% for person in tableau %}
             <tr>
+                <th scope="row">{{ person.id }}</th>
                 <td>{{ person.name }}</td>
                 <td>{{ person.firstname }}</td>
                 <td>{{ person.phone }}</td>

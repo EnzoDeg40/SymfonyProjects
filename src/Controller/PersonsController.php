@@ -23,13 +23,13 @@ class PersonsController extends AbstractController
     #[Route('/persons/list', name: 'show_persons')]
     public function price(ManagerRegistry $doctrine): Response
     {
-        //$person = $doctrine->getRepository(Persons::class)->ListAllPersons();
         $person = $doctrine->getRepository(Persons::class)->findAll();
+        //$person = $doctrine->getRepository(Persons::class)->ListAdults();
 
         //$em->getRepository(Contact::class)->findAll();
-        /*if (!$person) {
+        if (!$person) {
             throw $this->createNotFoundException('Aucune personne trouvé');
-        }*/
+        }
 
         //return new Response(var_dump($person));
 
@@ -48,6 +48,9 @@ class PersonsController extends AbstractController
         $person->setName ('Degraeve');
         $person->setFirstname('Enzo');
         $person->setPhone('0767635400');
+        $person->setAdress('Rue de la gare 1');
+        $person->setCity('Bruxelles');
+        $person->setAge(random_int(5, 34));
 
         // tell Doctrine you want to (eventually) save the person (no queries yet)
         $entityManager->persist($person);
@@ -74,7 +77,7 @@ class PersonsController extends AbstractController
         $entityManager->remove($person);
         $entityManager->flush();
 
-        return new Response('La personne avec l\'id ' . $id . ' a été supprimé');
+        return $this->redirectToRoute('show_persons');
     }
 
     // Afficher une personne dans la base de données a partir d'une vue

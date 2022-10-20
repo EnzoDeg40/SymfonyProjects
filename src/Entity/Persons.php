@@ -22,6 +22,15 @@ class Persons
     #[ORM\Column(type: 'integer')]
     private $Phone;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $adress;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $city;
+
+    #[ORM\Column(type: 'integer')]
+    private $age;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +68,42 @@ class Persons
     public function setPhone(int $Phone): self
     {
         $this->Phone = $Phone;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): self
+    {
+        $this->age = $age;
 
         return $this;
     }
