@@ -93,4 +93,20 @@ class ProductController extends AbstractController
             'products' => $products
         ]);*/
     }
+
+    #[Route('/product/price/{price}', name: 'product_price')]
+    public function price(ManagerRegistry $doctrine, int $price): Response
+    {
+
+        return new Response('Price: ' . $price);
+
+        $products = $doctrine->getRepository(Product::class)->findAllGreaterThanPrice($price);
+
+        if (!$products) {
+            throw $this->createNotFoundException('No products found');
+        }
+
+        return new Response(var_dump($products));
+    }
+
 }
