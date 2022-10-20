@@ -24,14 +24,20 @@
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Numéro de téléphone</th>
+                <td>Action</td>
             </tr>
         </thead>
         <tbody>
             {% for person in tableau %}
             <tr>
-                <td>{{ person.nom }}</td>
-                <td>{{ person.prenom }}</td>
-                <td>{{ person.number }}</td>
+                <td>{{ person.name }}</td>
+                <td>{{ person.firstname }}</td>
+                <td>{{ person.phone }}</td>
+                <td>
+                    <a href="{{path('show_person', {id: person.id}) }}" type="button" class="btn btn-info">Afficher</a>
+                    <a href="" type="button" class="btn btn-warning">Modifier</a>
+                    <a href="{{path('delete_person', {id: person.id}) }}" type="button" class="btn btn-danger">Supprimer</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
