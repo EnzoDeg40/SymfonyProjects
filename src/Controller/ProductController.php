@@ -89,13 +89,9 @@ class ProductController extends AbstractController
             throw $this->createNotFoundException('No products found');
         }
 
-        //return new Response(count($products));
-
-        return new Response(var_dump($products));
-
-        /*return $this->render('product/list.html.twig', [
+        return $this->render('list.html.twig', [
             'products' => $products
-        ]);*/
+        ]);
     }
 
     #[Route('/product/price/{price}', name: 'product_price')]
@@ -128,6 +124,8 @@ class ProductController extends AbstractController
             $entityManager = $doctrine->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Product added!');
 
             return $this->redirectToRoute('product_list');
         }

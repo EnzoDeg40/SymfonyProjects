@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    Salut
+
+    {% for message in app.flashes('success') %}
+        {{ message }}
+    {% endfor %}
+
+    {{ dump(products) }}
+
+{% endblock %}
