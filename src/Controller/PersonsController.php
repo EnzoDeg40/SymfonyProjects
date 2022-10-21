@@ -23,16 +23,14 @@ class PersonsController extends AbstractController
     #[Route('/persons/list', name: 'show_persons')]
     public function price(ManagerRegistry $doctrine): Response
     {
-        $person = $doctrine->getRepository(Persons::class)->findAll();
-        //$person = $doctrine->getRepository(Persons::class)->ListAdults();
+        //$person = $doctrine->getRepository(Persons::class)->findAll();
+        //$person = $doctrine->getRepository(Persons::class)->findByExampleField(18);
+        $person = $doctrine->getRepository(Persons::class)->findListAdults(18);
 
-        //$em->getRepository(Contact::class)->findAll();
         if (!$person) {
             throw $this->createNotFoundException('Aucune personne trouvé');
         }
-
-        //return new Response(var_dump($person));
-
+        
         return $this->render('base.html.twig', [
             'tableau' => $person
         ]);

@@ -39,29 +39,30 @@ class PersonsRepository extends ServiceEntityRepository
         }
     }
 
-    public function ListAdults(): array
+    /**
+     * @return Persons[]
+     */
+    public function findListAdults($value): array
     {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT id, name, firstname, phone, age
-            FROM App\Entity\Persons'
-            //WHERE age > 18'
-        );
+            'SELECT p
+            FROM App\Entity\Persons p
+            WHERE p.age > :age'
+        )->setParameter('age', $value);
 
         // returns an array of Product objects
         return $query->getResult();
-        
-        //return $this->findAll();
     }
 
 //    /**
-//     * @return Persons[] Returns an array of Persons objects
-//     */
+//    * @return Persons[] Returns an array of Persons objects
+//    */
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
+//            ->andWhere('p.age >= :val')
 //            ->setParameter('val', $value)
 //            ->orderBy('p.id', 'ASC')
 //            ->setMaxResults(10)
