@@ -5,7 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
+use App\Form\ProductType;
 use App\Entity\Product;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -87,7 +89,9 @@ class ProductController extends AbstractController
             throw $this->createNotFoundException('No products found');
         }
 
-        return new Response(count($products));
+        //return new Response(count($products));
+
+        return new Response(var_dump($products));
 
         /*return $this->render('product/list.html.twig', [
             'products' => $products
@@ -109,4 +113,23 @@ class ProductController extends AbstractController
         return new Response(var_dump($products));
     }
 
+    // Add product form
+    #[Route('/product/add', name: 'product_add')]
+    public function add(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $product = new Product();
+
+        $form = $this->createForm(ProductType::class, $product);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            //$product = $form->getData();
+
+            return $this->redirectToRoute('product_list');
+        }
+
+        return $this->renderForm('new.html.twig', [
+            'ProductType' => $form
+        ]);
+    }
 }
