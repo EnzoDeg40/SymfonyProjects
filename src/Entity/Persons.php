@@ -31,6 +31,9 @@ class Persons
     #[ORM\Column(type: 'integer')]
     private $age;
 
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'title')]
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class Persons
     public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
