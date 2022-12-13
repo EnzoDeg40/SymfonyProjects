@@ -11,6 +11,7 @@
     <title>My Agenda</title>
 </head>
 <body>
+    {% block body %}
     <nav class="navbar navbar-dark bg-dark">
         <!-- Navbar content -->
         <a class="navbar-brand" href="#">My Agenda</a>
@@ -44,6 +45,7 @@
             {% endfor %}
         </tbody>
     </table>
+    {% endblock %}
 
 
     <!-- Optional JavaScript -->
