@@ -16,11 +16,12 @@
         <!-- Navbar content -->
         <a class="navbar-brand" href="#">My Agenda</a>
         {% if (app.user) %}
-            <a class="navbar-link" href="/add">Ajouter un contact</a>
+            <a class="navbar-link" href="/persons/create">Ajouter un contact</a>
         {% endif %}
     </nav>
 
     {% if (app.user) %}
+        <span>Bonjour {{ app.user.email }}</span>
         <a href="/logout">Déconnexion</a>
     {% else %}
         <a href="/login">Connexion</a>
@@ -49,8 +50,10 @@
                 <td>{{ person.phone }}</td>
                 <td>
                     <a href="{{path('show_person', {id: person.id}) }}" type="button" class="btn btn-info">Afficher</a>
-                    <a href="" type="button" class="btn btn-warning">Modifier</a>
-                    <a href="{{path('delete_person', {id: person.id}) }}" type="button" class="btn btn-danger">Supprimer</a>
+                    {% if (app.user) %}
+                        <a href="" type="button" class="btn btn-warning">Modifier</a>
+                        <a href="{{path('delete_person', {id: person.id}) }}" type="button" class="btn btn-danger">Supprimer</a>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
