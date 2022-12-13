@@ -15,7 +15,18 @@
     <nav class="navbar navbar-dark bg-dark">
         <!-- Navbar content -->
         <a class="navbar-brand" href="#">My Agenda</a>
+        {% if (app.user) %}
+            <a class="navbar-link" href="/add">Ajouter un contact</a>
+        {% endif %}
     </nav>
+
+    {% if (app.user) %}
+        <a href="/logout">Déconnexion</a>
+    {% else %}
+        <a href="/login">Connexion</a>
+        <a href="/register">Inscription</a>
+    {% endif %}
+
 
     <h1>Liste des contacts</h1>
 
