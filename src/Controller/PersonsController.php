@@ -25,7 +25,7 @@ class PersonsController extends AbstractController
     {
         //$person = $doctrine->getRepository(Persons::class)->findAll();
         //$person = $doctrine->getRepository(Persons::class)->findByExampleField(18);
-        $person = $doctrine->getRepository(Persons::class)->findListAdults(18);
+        $person = $doctrine->getRepository(Persons::class)->findListAdults(0);
 
         if (!$person) {
             throw $this->createNotFoundException('Aucune personne trouvé');
@@ -93,5 +93,32 @@ class PersonsController extends AbstractController
         return $this->render('contact.html.twig', [
             'person' => $person
         ]);
+    }
+
+    // Edition d'une personne dans la base de données
+    #[Route('/persons/edit/{id}', name: 'edit_person')]
+    public function editPerson(ManagerRegistry $doctrine, int $id): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $person = $entityManager->getRepository(Persons::class)->find($id);
+
+        if (!$person) {
+            throw $this->createNotFoundException(
+                'Aucune personne trouvée avec l\'id ' . $id
+            );
+        }
+
+        // Create form
+        $form = $this->createFormBuilder($person)
+            ->add('name', TextType::class)
+            ->add('firstname', TextType::class)
+            ->add('phone', TextType::class)
+            ->add('adress', TextType::class)
+            ->add('city', TextType::class)
+            ->add('age', IntegerType::class)
+            ->add('save', SubmitType::class, ['label' => 'Modifier la personne'])
+            ->getForm();
+
+        $form->handleRequest($request);
     }
 }
