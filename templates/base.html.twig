@@ -51,7 +51,7 @@
                 <td>
                     <a href="{{path('show_person', {id: person.id}) }}" type="button" class="btn btn-info">Afficher</a>
                     {% if (app.user) %}
-                        <a href="" type="button" class="btn btn-warning">Modifier</a>
+                        <a href="{{path('edit_person', {id: person.id}) }}" type="button" class="btn btn-warning">Modifier</a>
                         <a href="{{path('delete_person', {id: person.id}) }}" type="button" class="btn btn-danger">Supprimer</a>
                     {% endif %}
                 </td>

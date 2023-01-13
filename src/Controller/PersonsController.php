@@ -9,6 +9,20 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Persons;
 use Doctrine\Persistence\ManagerRegistry;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+
+use App\Controller\IntegerType;
+
 class PersonsController extends AbstractController
 {
     #[Route('/persons', name: 'app_persons')]
@@ -120,5 +134,17 @@ class PersonsController extends AbstractController
             ->getForm();
 
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $person = $form->getData();
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('show_persons');
+        }
+
+        return $this->render('edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
